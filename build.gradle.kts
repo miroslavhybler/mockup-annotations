@@ -1,45 +1,12 @@
-@file:Suppress("UnstableApiUsage")
-
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-    `maven-publish`
+    `kotlin-dsl`
+    id("org.jetbrains.kotlin.android") version "2.0.0" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.0.0" apply false
+    id("com.google.devtools.ksp") version "2.0.0-1.0.21" apply false
+    id("org.jetbrains.dokka") version "1.8.20" apply false
 }
-
-group = "com.github.miroslavhybler"
-version = "2.0.0-alpha01"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
     withSourcesJar()
     withJavadocJar()
-}
-
-kotlin {
-    jvmToolchain(jdkVersion = 11)
-}
-
-dependencies {
-    implementation(libs.annotation)
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components.getByName("java"))
-                groupId = "com.github.miroslavhybler"
-                artifactId = "mockup-annotations"
-                version = "2.0.0-alpha01"
-                pom {
-                    description.set("Jitpack.io deploy")
-                }
-            }
-
-        }
-        repositories {
-            mavenLocal()
-        }
-    }
 }
